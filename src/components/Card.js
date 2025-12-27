@@ -7,13 +7,16 @@ const Card = ({
   content,
   image,
   onClick,
-  className = ""
+  className = "",
+  variant = "default",
+  imagePosition = "top",
+  disabled = false
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = (event) => {
-    if (!onClick) return;
+    if (disabled || !onClick) return;
 
     setIsActive(true);
     setTimeout(() => setIsActive(false), 300);
@@ -22,29 +25,45 @@ const Card = ({
   };
 
   const handleKeyDown = (event) => {
-    if ((event.key === "Enter" || event.key === " ") && onClick) {
+    if ((event.key === "Enter" || event.key === " ") && !disabled && onClick) {
       handleClick(event);
     }
   };
 
+  const cardClasses = [
+    "card",
+    className,
+    `card-variant-${variant}`,
+    `card-image-position-${imagePosition}`,
+    isHovered ? "card-hovered" : "",
+    isActive ? "card-active" : "",
+    disabled ? "card-disabled" : ""
+  ].filter(Boolean).join(" ");
+
+  const imageClasses = [
+    "card-image",
+    isHovered ? "card-image-hovered" : "",
+    isActive ? "card-image-active" : ""
+  ].filter(Boolean).join(" ");
+
   return (
     <div 
-      className={`card ${className} ${isHovered ? "card-hovered" : ""} ${isActive ? "card-active" : ""}`}
+      className={cardClasses}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      role={onClick ? "button" : "article"}
-      tabIndex={onClick ? 0 : undefined}
+      onMouseEnter={() => !disabled && setIsHovered(true)}
+      onMouseLeave={() => !disabled && setIsHovered(false)}
+      role={!disabled && onClick ? "button" : "article"}
+      tabIndex={!disabled && onClick ? 0 : undefined}
       aria-pressed={isActive}
+      aria-disabled={disabled}
     >
-      {image && (
-        <div className="card-image">
+      {image && imagePosition === "top" && (
+        <div className={imageClasses}>
           <img 
             src={image} 
             alt={title || "Card image"} 
             loading="lazy"
-            className={`${isHovered ? "card-image-hovered" : ""} ${isActive ? "card-image-active" : ""}`}
           />
         </div>
       )}
@@ -52,6 +71,15 @@ const Card = ({
         {title && <h3 className="card-title">{title}</h3>}
         {content && <p className="card-text">{content}</p>}
       </div>
+      {image && imagePosition === "bottom" && (
+        <div className={imageClasses}>
+          <img 
+            src={image} 
+            alt={title || "Card image"} 
+            loading="lazy"
+          />
+        </div>
+      )}
     </div>
   );
 };
@@ -61,7 +89,10 @@ Card.propTypes = {
   content: PropTypes.string,
   image: PropTypes.string,
   onClick: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  variant: PropTypes.oneOf(["default", "outlined", "elevated", "flat"]),
+  imagePosition: PropTypes.oneOf(["top", "bottom"]),
+  disabled: PropTypes.bool
 };
 
 Card.defaultProps = {
@@ -69,7 +100,10 @@ Card.defaultProps = {
   content: "",
   image: "",
   onClick: null,
-  className: ""
+  className: "",
+  variant: "default",
+  imagePosition: "top",
+  disabled: false
 };
 
 export default Card;
