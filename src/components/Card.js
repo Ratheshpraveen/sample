@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Card.css';
 
@@ -9,6 +9,23 @@ const Card = ({
   onClick, 
   className = '' 
 }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = (event) => {
+    setIsActive(true);
+    setTimeout(() => setIsActive(false), 300);
+    
+    if (onClick) {
+      onClick(event);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick(event);
+    }
+  };
+
   return (
     <div 
       className={`card ${className}`} 
@@ -42,4 +59,5 @@ Card.propTypes = {
 };
 
 export default Card;
+
 
