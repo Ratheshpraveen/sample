@@ -10,7 +10,11 @@ const Card = ({
   className = "",
   variant = "default",
   imagePosition = "top",
-  disabled = false
+  disabled = false,
+  renderTitle,
+  renderContent,
+  customStyles = {},
+  dataTestId
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -46,6 +50,18 @@ const Card = ({
     isActive ? "card-image-active" : ""
   ].filter(Boolean).join(" ");
 
+  const renderCardTitle = () => {
+    if (renderTitle) return renderTitle(title);
+    if (title) return <h3 className="card-title">{title}</h3>;
+    return null;
+  };
+
+  const renderCardContent = () => {
+    if (renderContent) return renderContent(content);
+    if (content) return <p className="card-text">{content}</p>;
+    return null;
+  };
+
   return (
     <div 
       className={cardClasses}
@@ -57,6 +73,8 @@ const Card = ({
       tabIndex={!disabled && onClick ? 0 : undefined}
       aria-pressed={isActive}
       aria-disabled={disabled}
+      style={customStyles}
+      data-testid={dataTestId}
     >
       {image && imagePosition === "top" && (
         <div className={imageClasses}>
@@ -68,8 +86,8 @@ const Card = ({
         </div>
       )}
       <div className="card-content">
-        {title && <h3 className="card-title">{title}</h3>}
-        {content && <p className="card-text">{content}</p>}
+        {renderCardTitle()}
+        {renderCardContent()}
       </div>
       {image && imagePosition === "bottom" && (
         <div className={imageClasses}>
@@ -85,14 +103,24 @@ const Card = ({
 };
 
 Card.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]),
   image: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
   variant: PropTypes.oneOf(["default", "outlined", "elevated", "flat"]),
   imagePosition: PropTypes.oneOf(["top", "bottom"]),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  renderTitle: PropTypes.func,
+  renderContent: PropTypes.func,
+  customStyles: PropTypes.object,
+  dataTestId: PropTypes.string
 };
 
 Card.defaultProps = {
@@ -103,7 +131,11 @@ Card.defaultProps = {
   className: "",
   variant: "default",
   imagePosition: "top",
-  disabled: false
+  disabled: false,
+  renderTitle: null,
+  renderContent: null,
+  customStyles: {},
+  dataTestId: null
 };
 
 export default Card;
