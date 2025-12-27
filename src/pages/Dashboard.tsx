@@ -1,49 +1,122 @@
 import React from 'react';
 import { 
-  Container, 
   Grid, 
-  Box 
+  Paper, 
+  Typography, 
+  Card, 
+  CardContent, 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead, 
+  TableRow 
 } from '@mui/material';
-import TopNavBar from '../components/TopNavBar';
-import HeroPanel from '../components/HeroPanel';
-import SummaryCards from '../components/SummaryCards';
-import EntriesTable from '../components/EntriesTable';
+import { 
+  AttachMoney as MoneyIcon, 
+  ShoppingCart as CartIcon, 
+  People as PeopleIcon 
+} from '@mui/icons-material';
 
-interface DashboardProps {
-  isDarkMode: boolean;
-  toggleDarkMode: () => void;
-}
+// Sample data for summary cards
+const summaryData = [
+  { 
+    icon: <MoneyIcon />, 
+    title: 'Revenue', 
+    value: '$24,000', 
+    color: 'success.main' 
+  },
+  { 
+    icon: <CartIcon />, 
+    title: 'Orders', 
+    value: '452', 
+    color: 'primary.main' 
+  },
+  { 
+    icon: <PeopleIcon />, 
+    title: 'Customers', 
+    value: '1,245', 
+    color: 'info.main' 
+  }
+];
 
-const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, toggleDarkMode }) => {
+// Sample data for the table
+const tableData = [
+  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'Pending' },
+  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'Inactive' }
+];
+
+const Dashboard: React.FC = () => {
   return (
-    <Box sx={{ 
-      backgroundColor: 'background.default', 
-      minHeight: '100vh',
-      color: 'text.primary'
-    }}>
-      <TopNavBar 
-        isDarkMode={isDarkMode} 
-        toggleDarkMode={toggleDarkMode} 
-      />
-      <Container maxWidth="xl" sx={{ paddingTop: 4 }}>
-        <Grid container spacing={3}>
-          {/* Hero Panel */}
-          <Grid item xs={12}>
-            <HeroPanel />
-          </Grid>
+    <Grid container spacing={3}>
+      {/* Hero Panel */}
+      <Grid item xs={12}>
+        <Paper 
+          elevation={3} 
+          sx={{ 
+            p: 3, 
+            backgroundColor: 'primary.main', 
+            color: 'white' 
+          }}
+        >
+          <Typography variant="h4">Welcome to Your Dashboard</Typography>
+          <Typography variant="subtitle1">
+            Here's an overview of your business performance
+          </Typography>
+        </Paper>
+      </Grid>
 
-          {/* Summary Cards */}
-          <Grid item xs={12}>
-            <SummaryCards />
-          </Grid>
-
-          {/* Entries Table */}
-          <Grid item xs={12}>
-            <EntriesTable />
-          </Grid>
+      {/* Summary Cards */}
+      {summaryData.map((card, index) => (
+        <Grid item xs={12} md={4} key={index}>
+          <Card>
+            <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid container alignItems="center" spacing={2}>
+                <Grid item>
+                  {React.cloneElement(card.icon, { 
+                    sx: { 
+                      color: card.color, 
+                      fontSize: 40 
+                    } 
+                  })}
+                </Grid>
+                <Grid item>
+                  <Typography variant="h6">{card.title}</Typography>
+                  <Typography variant="h4">{card.value}</Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
-      </Container>
-    </Box>
+      ))}
+
+      {/* Data Table */}
+      <Grid item xs={12}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tableData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.status}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
 };
 

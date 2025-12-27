@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme, { darkTheme } from './theme';
-import Dashboard from './pages/Dashboard';
+import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Navbar from './components/Navbar';
+import HeroPanel from './components/HeroPanel';
+import SummaryCards from './components/SummaryCards';
+import DataTable from './components/DataTable';
 
-function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#1976d2',
+    },
+  },
+});
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
+const App: React.FC = () => {
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Dashboard 
-        isDarkMode={isDarkMode} 
-        toggleDarkMode={toggleDarkMode} 
-      />
+      <Box sx={{ flexGrow: 1 }}>
+        <Navbar />
+        <Box sx={{ padding: 3 }}>
+          <HeroPanel />
+          <SummaryCards />
+          <DataTable />
+        </Box>
+      </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default App;
