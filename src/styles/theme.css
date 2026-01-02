@@ -1,0 +1,50 @@
+:root {
+  /* Light Mode Colors */
+  --card-background-light: #ffffff;
+  --card-text-color-light: #333333;
+  --card-border-color-light: #e0e0e0;
+  
+  /* Dark Mode Colors */
+  --card-background-dark: #1e1e1e;
+  --card-text-color-dark: #f0f0f0;
+  --card-border-color-dark: #3a3a3a;
+  
+  /* Common Card Styling Variables */
+  --card-border-radius: 8px;
+  --card-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --card-box-shadow-elevated: 0 8px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Spacing Variables */
+  --card-padding-small: 12px;
+  --card-padding-medium: 16px;
+  --card-padding-large: 24px;
+  
+  /* Typography */
+  --card-title-font-size: 1.25rem;
+  --card-subtitle-font-size: 1rem;
+  --card-text-font-size: 0.875rem;
+}
+
+/* Dark Mode Overrides */
+.dark-mode {
+  --card-background: var(--card-background-dark);
+  --card-text-color: var(--card-text-color-dark);
+  --card-border-color: var(--card-border-color-dark);
+}
+
+/* Light Mode (Default) */
+.light-mode {
+  --card-background: var(--card-background-light);
+  --card-text-color: var(--card-text-color-light);
+  --card-border-color: var(--card-border-color-light);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --card-border-radius: 6px;
+    --card-padding-small: 10px;
+    --card-padding-medium: 14px;
+    --card-padding-large: 16px;
+  }
+}
