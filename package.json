@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@types/prop-types": "^15.7.15",
+    "prop-types": "^15.8.1"
+  }
+}
