@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import Card from './components/Card';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      minHeight: '100vh',
+      gap: '20px'
+    }}>
+      <Card title="Basic Card">
+        <p>This is a simple card component with a title.</p>
+      </Card>
 
-export default App
+      <Card 
+        title="Clickable Card" 
+        onClick={() => alert('Card clicked!')}
+        className="hover-effect"
+      >
+        <p>Click me! I have an onClick handler.</p>
+      </Card>
+
+      <Card>
+        <h3>Cardless Title</h3>
+        <p>A card without a predefined title.</p>
+      </Card>
+    </div>
+  );
+};
+
+export default App;
