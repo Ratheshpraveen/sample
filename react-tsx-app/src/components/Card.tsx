@@ -42,7 +42,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
  * Follows React best practices for functional components
  */
 const Card = ({
-  title,
+  title = '',
   content,
   imageUrl,
   className = '',
@@ -51,7 +51,7 @@ const Card = ({
   ...props
 }: CardProps): JSX.Element => {
   // Combine base card class with any additional classes
-  const combinedClassName = .trim();
+  const combinedClassName = `card ${className}`.trim();
 
   // Determine if the card is interactive
   const isInteractive = !!onClick;
@@ -67,7 +67,7 @@ const Card = ({
       {imageUrl && (
         <img 
           src={imageUrl} 
-          alt={title || 'Card image'}
+          alt={title.length > 0 ? title : 'Card image'}
           className='card-image' 
           loading='lazy'
         />
@@ -85,3 +85,4 @@ const Card = ({
 Card.displayName = 'Card';
 
 export default Card;
+
