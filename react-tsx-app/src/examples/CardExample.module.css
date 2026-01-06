@@ -1,0 +1,22 @@
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.clickableCard {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.clickableCard:hover {
+  transform: scale(1.05);
+}
+
+.customStyledCard {
+  background-color: var(--accent-background, #f0f0f0);
+  border: 2px solid var(--accent-border, #cccccc);
+  color: var(--accent-text, #333333);
+}
