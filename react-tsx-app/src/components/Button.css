@@ -1,0 +1,75 @@
+:root {
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  --color-primary-hover: #0056b3;
+  --color-secondary-hover: #545b62;
+  --transition-speed: 0.2s;
+}
+
+.btn {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 
+    background-color var(--transition-speed) ease,
+    transform var(--transition-speed) ease;
+  outline: none;
+}
+
+/* Variant Styles */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover:not(.btn-disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.btn-secondary:hover:not(.btn-disabled) {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn-tertiary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn-tertiary:hover:not(.btn-disabled) {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Size Variations */
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.btn-medium {
+  padding: 10px 16px;
+  font-size: 1rem;
+}
+
+.btn-large {
+  padding: 14px 24px;
+  font-size: 1.25rem;
+}
+
+/* Disabled State */
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Active/Press Effect */
+.btn:active:not(.btn-disabled) {
+  transform: scale(0.98);
+}
