@@ -1,52 +1,30 @@
-import React from 'react'
-import { 
-  Container, 
-  Typography, 
-  Box, 
-  ThemeProvider, 
-  createTheme 
-} from '@mui/material'
-import ImageSlider from './components/ImageSlider'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
 import './App.css'
 
-// Create a custom theme
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-  },
-});
-
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="md">
-        <Box 
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 2,
-            textAlign: 'center'
-          }}
-        >
-          <Typography 
-            variant="h4" 
-            component="h1" 
-            gutterBottom
-            sx={{ marginBottom: 3 }}
-          >
-            Image Slider
-          </Typography>
-          
-          <ImageSlider />
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <>
+      <div>
+        <a href="https://www.metmuseum.org/art/collection/search/56353" target="_blank" rel="noopener noreferrer">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+        <h1>Vite + React</h1>
+        <div className="card">
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+          <p>
+            Edit <code>src/App.tsx</code> and save to test HMR
+          </p>
+        </div>
+        <p className="read-the-docs">
+          Click on the Vite and React logos to learn more
+        </p>
+      </div>
+    </>
   )
 }
 
