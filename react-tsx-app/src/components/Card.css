@@ -1,0 +1,94 @@
+/* Base Card Styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Card Image */
+.card-image-container {
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Card Title */
+.card-title {
+  margin: 0;
+  padding: 12px 16px;
+  font-weight: bold;
+}
+
+/* Card Content */
+.card-content {
+  padding: 12px 16px;
+}
+
+/* Variant Styles */
+.card-variant-basic {
+  border: 1px solid #e0e0e0;
+  background-color: white;
+}
+
+.card-variant-elevated {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.card-variant-outlined {
+  border: 2px solid #e0e0e0;
+  background-color: white;
+}
+
+/* Size Variants */
+.card-size-small {
+  max-width: 250px;
+}
+
+.card-size-medium {
+  max-width: 350px;
+}
+
+.card-size-large {
+  max-width: 500px;
+}
+
+/* Theme Variants */
+.card-theme-default {
+  color: #333;
+}
+
+.card-theme-primary {
+  background-color: #f0f0ff;
+  color: #0000ff;
+}
+
+.card-theme-secondary {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+/* Disabled State */
+.card-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Hover Effects */
+.card:not(.card-disabled):hover {
+  transform: scale(1.02);
+}
+
+.card-variant-elevated:not(.card-disabled):hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
