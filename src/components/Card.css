@@ -1,0 +1,67 @@
+/* Base Card Styles */
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Variant Styles */
+.card-variant-default {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-variant-outlined {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+}
+
+.card-variant-elevated {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Size Styles */
+.card-size-small {
+  padding: 8px;
+  font-size: 0.875rem;
+}
+
+.card-size-medium {
+  padding: 16px;
+  font-size: 1rem;
+}
+
+.card-size-large {
+  padding: 24px;
+  font-size: 1.125rem;
+}
+
+/* Color Styles */
+.card-color-neutral {
+  background-color: white;
+  color: #333;
+}
+
+.card-color-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.card-color-secondary {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.card-color-accent {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+}

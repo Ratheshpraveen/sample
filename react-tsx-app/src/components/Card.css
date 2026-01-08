@@ -1,0 +1,66 @@
+/* Base Card Styles */
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Variant Styles */
+.card-variant-default {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-variant-outlined {
+  border: 1px solid #e0e0e0;
+}
+
+.card-variant-elevated {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-variant-elevated:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Size Styles */
+.card-size-small {
+  padding: 12px;
+  font-size: 0.875rem;
+}
+
+.card-size-medium {
+  padding: 16px;
+  font-size: 1rem;
+}
+
+.card-size-large {
+  padding: 24px;
+  font-size: 1.125rem;
+}
+
+/* Color Styles */
+.card-color-primary {
+  background-color: #f0f4ff;
+  border-color: #3366ff;
+}
+
+.card-color-secondary {
+  background-color: #f0f0f0;
+  border-color: #666666;
+}
+
+.card-color-neutral {
+  background-color: white;
+  border-color: #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+    margin: 0;
+  }
+}
