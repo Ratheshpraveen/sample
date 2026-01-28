@@ -1,5 +1,9 @@
 import winston from "winston";
 
+/**
+ * Custom logger configuration using Winston
+ * Provides console and file transports with timestamp and colorized formatting
+ */
 const logger = winston.createLogger({
   level: "info",
   format: winston.format.combine(
@@ -42,4 +46,7 @@ const logger = winston.createLogger({
   ]
 });
 
+/**
+ * Export the configured logger for use across the application
+ */
 export default logger;
