@@ -3,10 +3,15 @@ import winston from "winston";
 const logger = winston.createLogger({
   level: "info",
   format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.colorize(),
-    winston.format.printf(({ timestamp, level, message }) => {
-      return `${timestamp} [${level}]: ${message}`;
+    winston.format.timestamp({
+      format: "YYYY-MM-DD HH:mm:ss"
+    }),
+    winston.format.errors({ stack: true }),
+    winston.format.splat(),
+    winston.format.colorize({ all: true }),
+    winston.format.printf(({ timestamp, level, message, stack }) => {
+      return `${timestamp} [${level}]: ${message}${stack ? "
+" + stack : ""}`;
     })
   ),
   transports: [
@@ -18,8 +23,8 @@ const logger = winston.createLogger({
       )
     }),
     // File transport for errors
-    new winston.transports.File({ 
-      filename: "logs/error.log", 
+    new winston.transports.File({
+      filename: "logs/error.log",
       level: "error",
       format: winston.format.combine(
         winston.format.timestamp(),
@@ -27,7 +32,7 @@ const logger = winston.createLogger({
       )
     }),
     // File transport for combined logs
-    new winston.transports.File({ 
+    new winston.transports.File({
       filename: "logs/combined.log",
       format: winston.format.combine(
         winston.format.timestamp(),
