@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import secureStorage from '../utils/secureStorage';
 
 interface LoginCredentials {
   email: string;
@@ -147,9 +148,9 @@ class AuthService {
     }
   }
 
-  async register(userData: { email: string; password: string; name?: string }): Promise<LoginResponse> {
+  async register(credentials: LoginCredentials): Promise<LoginResponse> {
     try {
-      const response = await this.api.post<LoginResponse>('/auth/register', userData);
+      const response = await this.api.post<LoginResponse>('/auth/register', credentials);
       const { token, refreshToken } = response.data;
 
       if (token) {
@@ -227,24 +228,24 @@ class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return secureStorage.getItemSync(this.TOKEN_KEY);
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    secureStorage.setItemSync(this.TOKEN_KEY, token);
   }
 
   getRefreshToken(): string | null {
-    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
+    return secureStorage.getItemSync(this.REFRESH_TOKEN_KEY);
   }
 
   setRefreshToken(token: string): void {
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, token);
+    secureStorage.setItemSync(this.REFRESH_TOKEN_KEY, token);
   }
 
   clearTokens(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    secureStorage.removeItem(this.TOKEN_KEY);
+    secureStorage.removeItem(this.REFRESH_TOKEN_KEY);
   }
 
   isTokenValid(token?: string): boolean {
@@ -308,4 +309,3 @@ const authService = new AuthService();
 export default authService;
 export { AuthService };
 export type { LoginCredentials, LoginResponse, RefreshTokenResponse, AuthError };
-
